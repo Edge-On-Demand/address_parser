@@ -243,13 +243,13 @@ class Scanner(object):
 
         self.parser = parser
 
-        suite_regex = r'(' + '|'.join(self.parser.suite_words) + r')'
+        suite_regex = r'(?:' + '|'.join(self.parser.suite_words) + r')'
 
         self.scanner = re.Scanner([
             (r"\s+", None),
             (suite_regex, self.s_suiteintro),
             (r"\d+\s*[\/]\s*\d+", self.s_fractionnumber),
-            (r"[a-zA-Z]*\d+[a-zA-Z]*\s*[\&\-]\s*[a-zA-Z]*\d+[a-zA-Z]*(\/\d+)?", self.s_multinumber),
+            (r"[a-zA-Z]*\d+[a-zA-Z]*\s*[\&\-]\s*[a-zA-Z]*\d+[a-zA-Z]*(?:\/\d+)?", self.s_multinumber),
             (r"[a-zA-Z\.\-\'\`]+", self.s_word),
             (r"\d+[a-zA-Z]+", self.s_alphanumber),
             (r"[a-zA-Z]+\d+", self.s_alphanumber),
